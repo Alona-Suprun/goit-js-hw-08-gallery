@@ -25,4 +25,22 @@ const makeGalleryMarkup = (images) => {
 
 const imagesMarkup = makeGalleryMarkup(galleryItem);
 galleryContainer.insertAdjacentHTML("beforeend", imagesMarkup);
+
 //Реализация делегирования на галерее ul.js-gallery и получение url большого изображения
+const bigImageLink = document.querySelector(".lightbox__image");
+const backdrop = document.querySelector(".lightbox");
+
+function onOpenModal() {
+  backdrop.classList.add("is-open");
+}
+
+const onGalleryContainerClick = (e) => {
+  if (!e.target.classList.contains("gallery__image")) {
+    return;
+  }
+  e.preventDefault();
+  bigImageLink.setAttribute("src", e.target.dataset.source);
+  onOpenModal();
+};
+
+galleryContainer.addEventListener("click", onGalleryContainerClick);
