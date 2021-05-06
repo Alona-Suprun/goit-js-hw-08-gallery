@@ -27,12 +27,13 @@ const imagesMarkup = makeGalleryMarkup(galleryItem);
 galleryContainer.insertAdjacentHTML("beforeend", imagesMarkup);
 
 //Реализация делегирования на галерее ul.js-gallery и получение url большого изображения
+//Открытие модального окна по клику на элементе галереи.
+//Подмена значения атрибута src элемента img.lightbox__image.
 const bigImageLink = document.querySelector(".lightbox__image");
 const backdrop = document.querySelector(".lightbox");
-
-function onOpenModal() {
+const onOpenModal = () => {
   backdrop.classList.add("is-open");
-}
+};
 
 const onGalleryContainerClick = (e) => {
   if (!e.target.classList.contains("gallery__image")) {
@@ -44,3 +45,12 @@ const onGalleryContainerClick = (e) => {
 };
 
 galleryContainer.addEventListener("click", onGalleryContainerClick);
+
+//Закрытие модального окна по клику на кнопку [data-action="close-lightbox"].
+const closeModal = document.querySelector(
+  'button[data-action="close-lightbox"]'
+);
+const onCloseModal = () => {
+  backdrop.classList.remove("is-open");
+};
+closeModal.addEventListener("click", onCloseModal);
