@@ -52,5 +52,7 @@ const closeModal = document.querySelector(
 );
 const onCloseModal = () => {
   backdrop.classList.remove("is-open");
+  //Очистка значения атрибута src элемента img.lightbox__image
+  bigImageLink.setAttribute("src", "");
 };
 closeModal.addEventListener("click", onCloseModal);
