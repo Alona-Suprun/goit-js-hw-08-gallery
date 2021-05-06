@@ -56,6 +56,7 @@ const onCloseModal = () => {
   bigImageLink.setAttribute("src", "");
 };
 closeModal.addEventListener("click", onCloseModal);
+
 //Закрытие модального окна по клику на div.lightbox__overlay
 
 const onBackdropClick = (e) => {
@@ -64,3 +65,11 @@ const onBackdropClick = (e) => {
   }
 };
 backdrop.addEventListener("click", onBackdropClick);
+
+//Закрытие модального окна по нажатию клавиши ESC.
+const onEscPress = (e) => {
+  if (e.code === "Escape") {
+    onCloseModal();
+  }
+};
+window.addEventListener("keydown", onEscPress);
