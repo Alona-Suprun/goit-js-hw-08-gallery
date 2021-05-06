@@ -56,3 +56,11 @@ const onCloseModal = () => {
   bigImageLink.setAttribute("src", "");
 };
 closeModal.addEventListener("click", onCloseModal);
+//Закрытие модального окна по клику на div.lightbox__overlay
+
+const onBackdropClick = (e) => {
+  if (e.target !== bigImageLink) {
+    onCloseModal();
+  }
+};
+backdrop.addEventListener("click", onBackdropClick);
