@@ -1,10 +1,17 @@
-import galleryItem from "./gallery-items.js";
-//Создание и рендер разметки по массиву данных и предоставленному шаблону
-const galleryContainer = document.querySelector(".js-gallery");
+import galleryItems from "./gallery-items.js";
 
-const makeGalleryMarkup = (images) => {
-  return images
-    .map(({ preview, original, description }) => {
+const galleryContainer = document.querySelector(".gallery.js-gallery");
+const bigImageLink = document.querySelector(".lightbox__image");
+const backdrop = document.querySelector(".lightbox");
+const closeModal = document.querySelector(
+  'button[data-action="close-lightbox"]'
+);
+
+let galleryImageIndex;
+
+const makeGalleryMarkup = (galleryItems) => {
+  return galleryItems
+    .map(({ preview, original, description }, index) => {
       return `
     <li class="gallery__item">
   <a
@@ -20,56 +27,66 @@ const makeGalleryMarkup = (images) => {
   </a>
 </li>`;
     })
-    .join(" ");
+    .join("");
 };
 
-const imagesMarkup = makeGalleryMarkup(galleryItem);
+const imagesMarkup = makeGalleryMarkup(galleryItems);
 galleryContainer.insertAdjacentHTML("beforeend", imagesMarkup);
-
-//Реализация делегирования на галерее ul.js-gallery и получение url большого изображения
-//Открытие модального окна по клику на элементе галереи.
-//Подмена значения атрибута src элемента img.lightbox__image.
-const bigImageLink = document.querySelector(".lightbox__image");
-const backdrop = document.querySelector(".lightbox");
-const onOpenModal = () => {
-  backdrop.classList.add("is-open");
-};
 
 const onGalleryContainerClick = (e) => {
   if (!e.target.classList.contains("gallery__image")) {
     return;
   }
   e.preventDefault();
-  bigImageLink.setAttribute("src", e.target.dataset.source);
+  galleryImageIndex = e.target.dataset.index;
+  console.log(galleryImageIndex);
+  bigImageLink.src = e.target.dataset.source;
   onOpenModal();
 };
 
 galleryContainer.addEventListener("click", onGalleryContainerClick);
 
-//Закрытие модального окна по клику на кнопку [data-action="close-lightbox"].
-const closeModal = document.querySelector(
-  'button[data-action="close-lightbox"]'
-);
-const onCloseModal = () => {
-  backdrop.classList.remove("is-open");
-  //Очистка значения атрибута src элемента img.lightbox__image
-  bigImageLink.setAttribute("src", "");
+const onOpenModal = () => {
+  backdrop.classList.add("is-open");
+  backdrop.addEventListener("click", onBackdropClick);
+  window.addEventListener("keydown", onEscPress);
+  window.addEventListener("keydown", onRightLeftPress);
 };
-closeModal.addEventListener("click", onCloseModal);
-
-//Закрытие модального окна по клику на div.lightbox__overlay
 
 const onBackdropClick = (e) => {
   if (e.target !== bigImageLink) {
     onCloseModal();
   }
 };
-backdrop.addEventListener("click", onBackdropClick);
 
-//Закрытие модального окна по нажатию клавиши ESC.
 const onEscPress = (e) => {
   if (e.code === "Escape") {
     onCloseModal();
   }
 };
-window.addEventListener("keydown", onEscPress);
+
+const onRightLeftPress = (e) => {
+  if (e.code === "ArrowRight") {
+    galleryImageIndex += 1;
+    if (galleryImageIndex === galleryItems.length) {
+      galleryImageIndex = 0;
+    }
+    bigImageLink.src = galleryItems[galleryImageIndex].original;
+    if (e.code === "ArrowLeft") {
+      galleryImageIndex -= 1;
+      if (galleryImageIndex === -1) {
+        galleryImageIndex = galleryItems.length - 1;
+      }
+      bigImageLink.src = galleryItems[galleryImageIndex].original;
+    }
+  }
+};
+
+const onCloseModal = () => {
+  backdrop.classList.remove("is-open");
+  backdrop.removeEventListener("click", onBackdropClick);
+  window.removeEventListener("keydown", onEscPress);
+  window.removeEventListener("keydown", onRightLeftPress);
+  bigImageLink.src = "";
+};
+closeModal.addEventListener("click", onCloseModal);
