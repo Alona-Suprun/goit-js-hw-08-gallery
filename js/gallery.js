@@ -23,6 +23,7 @@ const makeGalleryMarkup = (galleryItems) => {
       src="${preview}"
       data-source="${original}"
       alt="${description}"
+      data-index="${index}"
     />
   </a>
 </li>`;
@@ -67,18 +68,19 @@ const onEscPress = (e) => {
 
 const onRightLeftPress = (e) => {
   if (e.code === "ArrowRight") {
-    galleryImageIndex += 1;
+    galleryImageIndex++;
+
     if (galleryImageIndex === galleryItems.length) {
       galleryImageIndex = 0;
     }
     bigImageLink.src = galleryItems[galleryImageIndex].original;
-    if (e.code === "ArrowLeft") {
-      galleryImageIndex -= 1;
-      if (galleryImageIndex === -1) {
-        galleryImageIndex = galleryItems.length - 1;
-      }
-      bigImageLink.src = galleryItems[galleryImageIndex].original;
+  }
+  if (e.code === "ArrowLeft") {
+    galleryImageIndex -= 1;
+    if (galleryImageIndex === -1) {
+      galleryImageIndex = galleryItems.length - 1;
     }
+    bigImageLink.src = galleryItems[galleryImageIndex].original;
   }
 };
 
