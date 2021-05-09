@@ -19,8 +19,9 @@ const makeGalleryMarkup = (galleryItems) => {
     href="${original}"
   >
     <img
-      class="gallery__image"
-      src="${preview}"
+      loading="lazy"
+      class="gallery__image lazyload"
+      data-src="${preview}"
       data-source="${original}"
       alt="${description}"
       data-index="${index}"
@@ -40,7 +41,6 @@ const onGalleryContainerClick = (e) => {
   }
   e.preventDefault();
   galleryImageIndex = e.target.dataset.index;
-  console.log(galleryImageIndex);
   bigImageLink.src = e.target.dataset.source;
   onOpenModal();
 };
@@ -92,3 +92,26 @@ const onCloseModal = () => {
   bigImageLink.src = "";
 };
 closeModal.addEventListener("click", onCloseModal);
+
+//Lazy loading
+
+if ("loading" in HTMLImageElement.prototype) {
+  const lazyImages = document.querySelectorAll('img[loading="lazy"]');
+
+  lazyImages.forEach((img) => {
+    img.src = img.dataset.src;
+  });
+} else {
+  addLazyScript();
+}
+
+const addLazyScript = () => {
+  const script = document.createElement("script");
+  script.src =
+    "https://cdnjs.cloudflare.com/ajax/libs/lazysizes/5.2.2/lazysizes.min.js";
+  script.integrity =
+    "sha512-TmDwFLhg3UA4ZG0Eb4MIyT1O1Mb+Oww5kFG0uHqXsdbyZz9DcvYQhKpGgNkamAI6h2lGGZq2X8ftOJvF/XjTUg==";
+  script.crossOrigin = "anonymous";
+
+  document.body.appendChild(script);
+};

@@ -62,4 +62,94 @@ export default [
       "https://cdn.pixabay.com/photo/2019/05/17/04/35/lighthouse-4208843_1280.jpg",
     description: "Lighthouse Coast Sea",
   },
+  {
+    preview: "./images/rose-165819_1280.jpg",
+    original: "./images/rose-165819_1280.jpg",
+    description: "Blue rose",
+  },
+  {
+    preview: "./images/yellow-rose.jpg",
+    original: "./images/yellow-rose.jpg",
+    description: "Yellow rose",
+  },
+  {
+    preview: "./images/avenue.jpg",
+    original: "./images/avenue.jpg",
+    description: "avenue",
+  },
+  {
+    preview: "./images/bridge.jpg",
+    original: "./images/bridge.jpg",
+    description: "bridge",
+  },
+  {
+    preview: "./images/butterfly.jpg",
+    original: "./images/butterfly.jpg",
+    description: "butterfly",
+  },
+  {
+    preview: "./images/frog.jpg",
+    original: "./images/frog.jpg",
+    description: "frog",
+  },
+  {
+    preview: "./images/road.jpg",
+    original: "./images/road.jpg",
+    description: "road",
+  },
+  {
+    preview: "./images/tree.jpg",
+    original: "./images/tree.jpg",
+    description: "tree",
+  },
+  {
+    preview: "./images/flower-field.jpg",
+    original: "./images/flower-field.jpg",
+    description: "flower-field",
+  },
+  {
+    preview: "./images/bubble.jpg",
+    original: "./images/bubble.jpg",
+    description: "bubble",
+  },
+  {
+    preview: "./images/hot-air-balloon.jpg",
+    original: "./images/hot-air-balloon.jpg",
+    description: "hot-air-balloon",
+  },
+  {
+    preview: "./images/kid.jpg",
+    original: "./images/kid.jpg",
+    description: "kid",
+  },
+  {
+    preview: "./images/kingfisher.jpg",
+    original: "./images/kingfisher.jpg",
+    description: "kingfisher",
+  },
+  {
+    preview: "./images/soap-bubble.jpg",
+    original: "./images/soap-bubble.jpg",
+    description: "soap-bubble",
+  },
+  {
+    preview: "./images/surface.jpg",
+    original: "./images/surface.jpg",
+    description: "surface",
+  },
+  {
+    preview: "./images/hummingbird.jpg",
+    original: "./images/hummingbird.jpg",
+    description: "hummingbird",
+  },
+  {
+    preview: "./images/sunset.jpg",
+    original: "./images/sunset.jpg",
+    description: "sunset",
+  },
+  {
+    preview: "./images/flower.jpg",
+    original: "./images/flower.jpg",
+    description: "flower",
+  },
 ];
