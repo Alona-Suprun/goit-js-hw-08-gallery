@@ -40,7 +40,7 @@ const onGalleryContainerClick = (e) => {
     return;
   }
   e.preventDefault();
-  galleryImageIndex = e.target.dataset.index;
+  galleryImageIndex = Number(e.target.dataset.index);
   bigImageLink.src = e.target.dataset.source;
   onOpenModal();
 };
@@ -68,7 +68,7 @@ const onEscPress = (e) => {
 
 const onRightLeftPress = (e) => {
   if (e.code === "ArrowRight") {
-    galleryImageIndex++;
+    galleryImageIndex += 1;
 
     if (galleryImageIndex === galleryItems.length) {
       galleryImageIndex = 0;
